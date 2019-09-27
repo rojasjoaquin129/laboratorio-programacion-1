@@ -99,34 +99,8 @@ int buscarLugarLibrePantalla(struct sPantalla *aArray, int cantidad){
 	}
 	return retorno;
 }
-int buscarLugarLibrePublicidad(struct sPublicidad *aArray, int cantidad){
-	int retorno = -1;
-	int i;
-	if(aArray != NULL && cantidad > 0){
-		for(i=0;i<cantidad;i++){
-			if(aArray[i].status == STATUS_EMPTY){
-				retorno = i;
-				break;
-			}
-		}
-	}
-	return retorno;
-}
 
 
-
-int buscarPublicidadPorCuit(struct sPublicidad *aArray, int cantidad,int cuit){
-	int retorno = -1;
-	int i;
-	if(aArray!=NULL && cantidad > 0 ){
-		for(i=0;i<cantidad;i++){
-			if(aArray[i].cuit == cuit && aArray[i].status == STATUS_NOT_EMPTY){
-				retorno = i;
-				break;
-			}
-		}
-	}
-	return retorno;
 
 int buscarPantallaPorId(struct sPantalla *aArray, int cantidad,int id){
 	int retorno = -1;
@@ -137,24 +111,6 @@ int buscarPantallaPorId(struct sPantalla *aArray, int cantidad,int id){
 				retorno = i;
 				break;
 			}
-		}
-	}
-	return retorno;
-}
-int MostarPantallaPorCuit(struct sPublicidad *aArrayPublicidad, struct sPantalla *aArray,int cantidad,int cuit){
-	int retorno = -1;
-	int i;
-	int id;
-	int j;
-	if(aArray!=NULL && cantidad > 0 ){
-		for(i=0;i<cantidad;i++){
-			if(aArrayPublicidad[i].cuit == cuit && aArray[i].status == STATUS_NOT_EMPTY){
-				id=aArrayPublicidad[i].idPantalla;
-				j=buscarPantallaPorId(aArray,cantidad,id);
-				if(aArray[j].status == STATUS_NOT_EMPTY){
-					printf("%d -- %s -- %s -- %f -- %d \n",aArray[j].id,aArray[j].nombre,aArray[j].direccion,aArray[j].precio,aArray[j].tipo);
-					}
-				}
 		}
 	}
 	return retorno;
@@ -175,20 +131,6 @@ int altaPantallaPorId(struct sPantalla *aArray, int cantidad,struct sPantalla it
 	return retorno;
 }
 
-int altaPublicidadPorId(struct sPublicidad *aArray, int cantidad,struct sPublicidad item){
-	int retorno = -1;
-	int index;
-	if(aArray!=NULL && cantidad>0){
-		index = buscarLugarLibrePantalla(aArray, cantidad);
-		if(index>=0){
-			aArray[index] = item;
-			aArray[index].status = STATUS_NOT_EMPTY;
-			aArray[index].id = generarId();
-			retorno = 0;
-		}
-	}
-	return retorno;
-}
 int bajaPantallaPorId(struct sPantalla *aArray, int cantidad,int id){
 	int retorno = -1;
 	int index;

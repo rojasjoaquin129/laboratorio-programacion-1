@@ -5,16 +5,19 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/Pantalla.c \
+../src/Publicidad.c \
 ../src/parcial1.c \
 ../src/utn.c 
 
 OBJS += \
 ./src/Pantalla.o \
+./src/Publicidad.o \
 ./src/parcial1.o \
 ./src/utn.o 
 
 C_DEPS += \
 ./src/Pantalla.d \
+./src/Publicidad.d \
 ./src/parcial1.d \
 ./src/utn.d 
 

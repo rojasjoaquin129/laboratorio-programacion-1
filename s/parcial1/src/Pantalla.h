@@ -14,16 +14,6 @@
 #define STATUS_EMPTY 0
 #define STATUS_NOT_EMPTY 1
 
-struct sPublicidad
-{
-	int id;
-	int status;
-	//***************
-	char nombre[50];
-	int dias;
-	int idPantalla;
-	int cuit;
-};
 struct sPantalla
 {
 	int id;
@@ -34,14 +24,12 @@ struct sPantalla
 	float precio;
 	int tipo;
 };
-int buscarLugarLibrePublicidad(struct sPublicidad *aArray, int cantidad);
-int altaPublicidadPorId(struct sPublicidad *aArray, int cantidad,struct sPublicidad item);
+
 int initLugarLibrePantalla(struct sPantalla *aArray, int cantidad);
-int MostarPantallaPorCuit(struct sPublicidad *aArrayPublicidad, struct sPantalla *aArray,
-		int cantidad,int cuit);
+
 int imprimirArrayPantallas(struct sPantalla *aArray, int cantidad);
 int ordenarArrayPantallas(struct sPantalla *aArray, int cantidad);
-int buscarPublicidadPorCuit(struct sPublicidad *aArray, int cantidad,int cuit);
+
 int buscarLugarLibrePantalla(struct sPantalla *aArray, int cantidad);
 int buscarPantallaPorId(struct sPantalla *aArray, int cantidad,int id);
 int altaPantallaPorId(struct sPantalla *aArray, int cantidad,struct sPantalla item);
