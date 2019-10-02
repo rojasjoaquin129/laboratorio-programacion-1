@@ -18,39 +18,58 @@
 
 int main(void) {
 	Employee list [QTY_EMPLEADOS];
-	Employee bList;
+	int salir=0;
 	int id=0;
-	int idIn;
-	int posicion;
+	int alta=-1;
 	int opcion=0;
 	initEmployees(list,QTY_EMPLEADOS);
 	do{
 		printf( "1. Alta de Empleado\n"
 				"2. Modificacion de Empleado\n"
 				"3. Baja de Empleado\n"
-				"4. listar\n"
-				"5. Modificar publicidad\n"
-				"7. Mostrar costo de contrataciones de un cliente\n"
-				"9. Listado de pantallas\n"
-				"0. Salir\n");
+				"4. lista de Empleados\n"
+				"5. Salir\n");
 
 		getInt(&opcion, "Ingrese la opcion\n", "Error\n", 1,5, 3);
 		switch(opcion){
 		case 1:
-			altaUI(&list,QTY_EMPLEADOS,id);
+			if (altaUI(&list,QTY_EMPLEADOS,id)==0){
+				alta=0;
+				break;
+			}
 			break;
 		case 2:
-			modificacionUI(&list,QTY_EMPLEADOS);
+			if(alta==0){
+				modificacionUI(&list,QTY_EMPLEADOS);
+			} else {
+				printf("no existe ningun empleado para modificar\n");
+			}
 			break;
 		case 3:
-			bajaUI(list,QTY_EMPLEADOS);
+			if(alta==0){
+				bajaUI(&list,QTY_EMPLEADOS);
+			} else {
+				printf("no existe ningun empleado para eliminar\n");
+			}
 			break;
 		case 4:
-			imprimirUI(list,QTY_EMPLEADOS);
+			if(alta==0){
+				ordenarEmployee(list,QTY_EMPLEADOS);
+				printEmployee(list,QTY_EMPLEADOS);
+				promedioEmployee(list,QTY_EMPLEADOS);
+			} else {
+				printf("no existe ningun empleado para mostar ni ordenar\n");
+			}
+
 			break;
 		case 5:
+			salir=1;
+			print("que tenga un buen dia\n");
+			break;
+		default:
+			print("ERROR, la opcion invalida\n");
 			break;
 		}
-	}while (orden=5);
+	}while (salir);
 	return EXIT_SUCCESS;
 }

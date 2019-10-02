@@ -147,11 +147,11 @@ int printEmployees(Employee* list, int length){
 	if(list != NULL && length>0)
 	{
 		retorno = 0;
-		printf("id     Nombre    Direccion    Precio     Tipo\n");
-		for(i=0;i<list;i++)
+		printf("id     Nombre    Apellido    Salario     Sector\n");
+		for(i=0;i<length;i++)
 		{
 			if(list[i].isEmpty == STATUS_NOT_EMPTY){
-				printf("%d -- %s -- %s -- %f -- %d \n",list[i].id,list[i].name,list[i].lastname,list[i].precio,list[i].tipo);
+				printf("%d -- %s -- %s -- %f -- %d \n",list[i].id,list[i].name,list[i].lastName,list[i].salary,list[i].sector);
 			}
 
 		}
@@ -270,3 +270,111 @@ int listForModify(Employee* item){
 	}while(conf!='s');
 return retorno;
 }
+
+
+int bajaUI(Employee* list,int len){
+	int idIn;
+	int posicion;
+	int retorno=-1;
+	char conf;
+	printf("Baja\n");
+	getInt(&idIn,"Ingrese el id para dar de baja\n","Error\n",1,100000,30);
+	posicion=findEmployeeById(list,len,idIn);
+	if (posicion == -1) {
+		printf("Error el id no existe\n");
+		}else{
+			printf("%d -- %s -- %s -- %f -- %d \n",list[posicion].id,list[posicion].name,list[posicion].lastName,list[posicion].salary,list[posicion].sector);
+			getChar(&conf,"Ingrese s para confirmar la baja\n","Error\n",'a', 'z', 2);
+			if(conf=='s'|| conf=='S'){
+				if(removeEmployee(list,len,idIn)==0){
+					printf("Baja exitosa\n");
+					retorno=0;
+				}
+			}
+		}
+	if(retorno!=0){
+		printf("error  al dar el baja ");
+	}
+return retorno;
+}
+
+int ordenarArrayString(Employee* list, int len){
+	Employee swapList;
+	int i;
+	int retorno = -1;
+	int fSwap;
+	char pregunta;
+	if(list != NULL && len>0)
+	{
+		retorno = 0;
+		printf("quiere mostrarlo de menor a mayor? s/n\n");
+		scanf("%s",&pregunta);
+		do
+		{
+			fSwap = 0;
+			for(i=0;i<len-1;i++)
+			{
+				if (pregunta=='s'){
+					if(strncmp(list[i].lastName,list[i+1].lastName,QTY_CARACTERES)>0){
+						fSwap = 1;
+						swapList=list[i];
+						list[i]=list[i+1];
+						list[i+1]=swapList;
+					}else if(strncmp(list[i].lastName,list[i+1].lastName,QTY_CARACTERES)==0 &&
+						strncmp(list[i].name,list[i+1].name,QTY_CARACTERES)>0){
+						fSwap = 1;
+						swapList=list[i];
+						list[i]=list[i+1];
+						list[i+1]=swapList;
+					}
+				}else if(pregunta=='n'){
+					if(strncmp(list[i].lastName,list[i+1].lastName,QTY_CARACTERES)<0){
+						fSwap = 1;
+						swapList=list[i];
+						list[i]=list[i+1];
+						list[i+1]=swapList;
+					}else if(strncmp(list[i].lastName,list[i+1].lastName,QTY_CARACTERES)==0 &&
+						strncmp(list[i].name,list[i+1].name,QTY_CARACTERES)<0){
+						fSwap = 1;
+						swapList=list[i];
+						list[i]=list[i+1];
+						list[i+1]=swapList;
+					}
+				}
+				}
+		}while(fSwap);
+	}
+	return retorno;
+}
+int promedioEmployees(Employee* list, int length){
+	int i;
+	float acumulador=0;
+	float promedio=0;
+	int contador=0;
+	int retorno = -1;
+	int contadorSuperaPromedio=0;
+	if(list != NULL && length>0)
+	{
+		retorno = 0;
+		for(i=0;i<length;i++)
+		{
+			if(list[i].isEmpty == STATUS_NOT_EMPTY){
+				acumulador=list[i].salary+acumulador;
+				contador++;
+			}
+		}
+		promedio=(float)acumulador/contador;
+		for(i=0;i<length;i++)
+		{
+			if(list[i].isEmpty == STATUS_NOT_EMPTY){
+				if (promedio<list[i].salary){
+					contadorSuperaPromedio++;
+				}
+			}
+		}
+		printf("El total de todo los salarios es  %f \n El promedio de salario es %f \n",acumulador,promedio);
+		printf("La cantidad de empleados q supera el promedio de salario es de %d  personas\n",contadorSuperaPromedio);
+	}
+	return retorno;
+}
+
