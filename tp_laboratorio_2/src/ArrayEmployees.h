@@ -1,12 +1,12 @@
 /*
- * employees.h
+ * ArrayEmployees.h
  *
  *  Created on: 28 sep. 2019
  *      Author: alumno
  */
 
-#ifndef EMPLOYEES_H_
-#define EMPLOYEES_H_
+#ifndef ARRAYEMPLOYEES_H_
+#define ARRAYEMPLOYEES_H_
 #define QTY_EMPLEADOS 1000
 #define QTY_CARACTERES 51
 
@@ -38,4 +38,4 @@ int modifyEmployeeforId(Employee* list, int len,Employee* item);
 int printEmployees(Employee* list, int length);
 
 
-#endif /* EMPLOYEES_H_ */
+#endif /* ARRAYEMPLOYEES_H_ */

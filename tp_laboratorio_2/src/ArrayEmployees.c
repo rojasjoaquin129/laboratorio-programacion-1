@@ -8,8 +8,9 @@
 #include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "ArrayEmployees.h"
 #include "utn.h"
-#include "employees.h"
 
 static int generarId(void){
 	static int id = 0;
@@ -298,7 +299,7 @@ int bajaUI(Employee* list,int len){
 return retorno;
 }
 
-int ordenarArrayString(Employee* list, int len){
+int sortEmployees(Employee* list, int len, int order){
 	Employee swapList;
 	int i;
 	int retorno = -1;
@@ -307,34 +308,32 @@ int ordenarArrayString(Employee* list, int len){
 	if(list != NULL && len>0)
 	{
 		retorno = 0;
-		printf("quiere mostrarlo de menor a mayor? s/n\n");
-		scanf("%s",&pregunta);
 		do
 		{
 			fSwap = 0;
 			for(i=0;i<len-1;i++)
 			{
-				if (pregunta=='s'){
+				if (order==1){
 					if(strncmp(list[i].lastName,list[i+1].lastName,QTY_CARACTERES)>0){
 						fSwap = 1;
 						swapList=list[i];
 						list[i]=list[i+1];
 						list[i+1]=swapList;
 					}else if(strncmp(list[i].lastName,list[i+1].lastName,QTY_CARACTERES)==0 &&
-						strncmp(list[i].name,list[i+1].name,QTY_CARACTERES)>0){
+						strncmp(list[i].sector,list[i+1].sector,QTY_CARACTERES)>0){
 						fSwap = 1;
 						swapList=list[i];
 						list[i]=list[i+1];
 						list[i+1]=swapList;
 					}
-				}else if(pregunta=='n'){
+				}else if(order=0){
 					if(strncmp(list[i].lastName,list[i+1].lastName,QTY_CARACTERES)<0){
 						fSwap = 1;
 						swapList=list[i];
 						list[i]=list[i+1];
 						list[i+1]=swapList;
 					}else if(strncmp(list[i].lastName,list[i+1].lastName,QTY_CARACTERES)==0 &&
-						strncmp(list[i].name,list[i+1].name,QTY_CARACTERES)<0){
+						strncmp(list[i].sector,list[i+1].sector,QTY_CARACTERES)<0){
 						fSwap = 1;
 						swapList=list[i];
 						list[i]=list[i+1];
