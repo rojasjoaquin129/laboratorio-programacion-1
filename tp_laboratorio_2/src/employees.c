@@ -194,26 +194,27 @@ int modificacionUI(Employee* list,int len){
 	int posicion;
 	int retorno=-1;
 	printf("Modificacion de Empleados\n");
-	if(getInt(&idIn,"Ingrese el id para modificar\n","Error\n",0,100000,3)==0){
-		posicion=findEmployeeById(list,len,idIn);
-					if (posicion == -1) {
-							printf("Error el id no existe\n");
-						}else{
-							bList=list[posicion];
-							printf("%d -- %s -- %s -- %f -- %d \n",list[posicion].id,list[posicion].name,list[posicion].lastName,list[posicion].salary,list[posicion].sector);
-							if(listForModify(bList)==0){
-								if (modifyEmployeeforId(list,len, bList) == 0) {
-									printf("Modificacion exitosa\n");
-									retorno=0;
-							} else {
-								printf("Error al hacer la modificacion\n");
-							}
+	getInt(&idIn,"Ingrese el id para modificar\n","Error\n",0,100000,3)
+	posicion=findEmployeeById(list,len,idIn);
+			if (posicion == -1) {
+					printf("Error el id no existe\n");
+				}else{
+					bList=list[posicion];
+					printf("%d -- %s -- %s -- %f -- %d \n",list[posicion].id,list[posicion].name,list[posicion].lastName,list[posicion].salary,list[posicion].sector);
+					if(listForModify(bList)==0){
+						if (modifyEmployeeforId(list,len, bList) == 0) {
+							printf("Modificacion exitosa\n");
+							retorno=0;
 						}
 					}
+				}
+	if(retorno!=0){
+		printf("error al modificar los datos\n");
 	}
 return retorno;
 }
-int listForModify(Employee* bList){
+
+int listForModify(Employee* item){
 	int lista;
 	int retorno=-1;
 	char conf;
@@ -227,7 +228,7 @@ int listForModify(Employee* bList){
 		getInt(&lista, "Ingrese la opcion \n", "Error\n",1, 5, 3);
 		switch(lista){
 			case 1:
-				if (getString(bList.name, "Ingrese el nombre\n", "Error\n", 1,
+				if (getString(item->name,"Ingrese el nombre\n", "Error\n", 1,
 												50, 2) == -1) {
 					printf("Error en el nombre\n");
 					break;
@@ -235,27 +236,27 @@ int listForModify(Employee* bList){
 
 			break;
 			case 2:
-				if (getString(bList.lastName, "Ingrese el Apellido\n",
+				if (getString(item->lastName, "Ingrese el Apellido\n",
 						"Error", 1, 50, 2) == -1) {
 					printf("Error en el Apellido \n");
 					break;
 				}
 			break;
 			case 3:
-				if (getFloat(&bList.salary, "Ingrese el salario\n", "Error\n", 0,
+				if (getFloat(&item->salary, "Ingrese el salario\n", "Error\n", 0,
 						1000000, 2) == -1) {
 					printf("Error en el salario\n");
 					break;
 				}
 			break;
 			case 4:
-				if (getInt(&bList.sector, "Ingrese el sector del Empleado\n", "Error\n",1, 1000, 3) == -1) {
+				if (getInt(&item->sector, "Ingrese el sector del Empleado\n", "Error\n",1, 1000, 3) == -1) {
 					printf("Error en el tipo\n");
 					break;
 			}
 			break;
 			case 5:
-				printf("%d -- %s -- %s -- %f -- %d \n",bList.id,bList.name,bList.lastName,bList.salary,bList.sector);
+				printf("%d -- %s -- %s -- %f -- %d \n",item->id,item->name,item->lastName,item->salary,item->sector);
 				printf("esta seguro de la  modificacion ? S/N");
 				getChar(&conf,"Ingrese s para confirmar la modificacion\n","Error\n",'a', 'z', 3);
 				if(conf=='s'){

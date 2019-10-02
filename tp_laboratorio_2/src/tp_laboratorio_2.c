@@ -34,22 +34,23 @@ int main(void) {
 				"9. Listado de pantallas\n"
 				"0. Salir\n");
 
-		getInt(&opcion, "Ingrese la opcion\n", "Error\n", 0, 9, 3);
+		getInt(&opcion, "Ingrese la opcion\n", "Error\n", 1,5, 3);
 		switch(opcion){
 		case 1:
 			altaUI(&list,QTY_EMPLEADOS,id);
 			break;
 		case 2:
-			if(modificacionUI(&list,QTY_EMPLEADOS)==-1){
-			printf("Error en la modificacion");
-			break;
-			}
+			modificacionUI(&list,QTY_EMPLEADOS);
 			break;
 		case 3:
-
+			bajaUI(list,QTY_EMPLEADOS);
+			break;
+		case 4:
+			imprimirUI(list,QTY_EMPLEADOS);
+			break;
+		case 5:
+			break;
 		}
-
-
 	}while (orden=5);
 	return EXIT_SUCCESS;
 }
