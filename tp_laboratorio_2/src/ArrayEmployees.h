@@ -25,17 +25,19 @@ struct
 
 int generarId(void);
 
-int altaUI(Employee *list,int len,int id);
-int modificacionUI(Employee* list,int len);
-int listForModify(Employee* bList);
 
 int initEmployees(Employee* list, int len);
 int findPlaceFreeEmployee(Employee *list, int len);
-int findEmployeeById(Employee* list,, int len,int id);
+int findEmployeeById(Employee* list, int len,int id);
 int addEmployee(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector);
 int removeEmployee(Employee* list, int len,int id);
 int modifyEmployeeforId(Employee* list, int len,Employee* item);
 int printEmployees(Employee* list, int length);
 
+int addUI(Employee *list,int len,int id);
+int modifyUI(Employee* list,int len);
+int listForModify(Employee* item);
+int removeUI(Employee* list,int len);
+int averageEmployees(Employee* list, int length);
 
 #endif /* ARRAYEMPLOYEES_H_ */

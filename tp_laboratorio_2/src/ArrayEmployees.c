@@ -62,7 +62,7 @@ int findPlaceFreeEmployee(Employee *list, int len){
 pointer received or employee not found]
  *
  */
-int findEmployeeById(Employee* list,, int len,int id){
+int findEmployeeById(Employee* list, int len,int id){
 	int retorno = -1;
 	int i;
 	if(list!=NULL && len > 0 ){
@@ -118,11 +118,11 @@ int removeEmployee(Employee* list, int len,int id){
 	return retorno;
 }
 
-int modifyEmployeeforId(Employee* list, int len,Employee* item){
+int modifyEmployeeforId(Employee* list, int len,Employee item){
 	int retorno = -1;
 	int index;
 	if(list!=NULL && len>0){
-		index = findEmployeeById(list, len, item.id);
+		index = findEmployeeById(list,len,item.id);
 		if(index!=-1){
 			list[index] = item;
 			list[index].isEmpty = STATUS_NOT_EMPTY;
@@ -161,7 +161,7 @@ int printEmployees(Employee* list, int length){
 }
 
 
-int altaUI(Employee *list,int len,int id)
+int addUI(Employee *list,int len,int id)
 {
 	Employee bList;
 	int retorno=-1;
@@ -189,7 +189,7 @@ int altaUI(Employee *list,int len,int id)
 	return retorno;
 }
 
-int modificacionUI(Employee* list,int len){
+int modifyUI(Employee* list,int len){
 	Employee bList;
 	int idIn;
 	int posicion;
@@ -273,7 +273,7 @@ return retorno;
 }
 
 
-int bajaUI(Employee* list,int len){
+int removeUI(Employee* list,int len){
 	int idIn;
 	int posicion;
 	int retorno=-1;
@@ -345,7 +345,7 @@ int sortEmployees(Employee* list, int len, int order){
 	}
 	return retorno;
 }
-int promedioEmployees(Employee* list, int length){
+int averageEmployees(Employee* list, int length){
 	int i;
 	float acumulador=0;
 	float promedio=0;
