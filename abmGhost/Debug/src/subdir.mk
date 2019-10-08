@@ -4,13 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/abmGhost.c 
+../src/ABMGhost.c \
+../src/abmGhost.c \
+../src/utn.c 
 
 OBJS += \
-./src/abmGhost.o 
+./src/ABMGhost.o \
+./src/abmGhost.o \
+./src/utn.o 
 
 C_DEPS += \
-./src/abmGhost.d 
+./src/ABMGhost.d \
+./src/abmGhost.d \
+./src/utn.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
