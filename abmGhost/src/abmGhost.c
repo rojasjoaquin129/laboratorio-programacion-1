@@ -15,13 +15,16 @@
 #include "utn.h"
 #include "ABMGhost.h"
 
+#define QTY_EMPLEADOS 1000
+
+
 int main(void) {
 	Ghost list[QTY_EMPLEADOS];
 	int out = 1;
 	int id = 0;
 	int assistantAdd = -1;
 	int opcion = 0;
-	initLugarLibre	(list, QTY_EMPLEADOS);
+	initLugarLibre(list, QTY_EMPLEADOS);
 	do {
 		printf("\n"
 				"1. Alta de Empleado\n"
@@ -40,21 +43,21 @@ int main(void) {
 			break;
 		case 2:
 			if (assistantAdd == 0) {
-				modifyUI(list, QTY_EMPLEADOS);
+				modificarUI(list, QTY_EMPLEADOS);
 			} else {
 				printf("No existe ningun empleado para modificar\n");
 			}
 			break;
 		case 3:
 			if (assistantAdd == 0) {
-				removeUI(list, QTY_EMPLEADOS);
+				eliminarUI(list, QTY_EMPLEADOS);
 			} else {
 				printf("No existe ningun empleado para eliminar\n");
 			}
 			break;
 		case 4:
 			if (assistantAdd == 0) {
-				printUI(list,QTY_EMPLEADOS);
+				//printUI(list,QTY_EMPLEADOS);
 			} else {
 				printf("No existe ningun empleado para mostar ni ordenar\n");
 			}

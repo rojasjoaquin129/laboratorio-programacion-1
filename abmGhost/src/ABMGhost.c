@@ -248,7 +248,7 @@ int ModificarPorId(Ghost *list, int len,Ghost item)
 	return retorno;
 }
 
-
+/*
 int printEmployees(Ghost *list, int length) {
 	int i;
 	int retorno = -1;
@@ -266,12 +266,12 @@ int printEmployees(Ghost *list, int length) {
 	}
 	return retorno;
 }
-
+*/
 int addUI(Ghost *list, int len, int id) {
 	Ghost bList;
 	int retorno = -1;
 	printf("ALTA\n");
-	if (findPlaceFreeEmployee(list, len) == -1) {
+	if (buscarLugarLibre(list, len) == -1) {
 		printf("ERROR,No hay mas lugar  para ingresar \n ");
 	} else {
 		if (getString(bList.nombre, "Ingrese nombre\n", "Error\n", 0, 50, 3)
@@ -284,9 +284,7 @@ int addUI(Ghost *list, int len, int id) {
 					if (getInt(&bList.tipo, "Ingrese sector del Empleado\n",
 							"Error\n", 1, 1000, 3) != -1) {
 						id++;
-						if (addEmployee(list, len, id, bList.nombre,
-								bList.direccion, bList.precio, bList.tipo)
-								== 0) {
+						if (altaPorId(list,len,bList)== 0) {
 							printf("Alta exitosa\n");
 							retorno = 0;
 						}
@@ -308,7 +306,7 @@ int modificarUI(Ghost *list, int len) {
 	int retorno = -1;
 	printf("Modificacion de Empleados\n");
 	getInt(&idIn, "Ingrese el id para modificar\n", "Error\n", 0, 100000, 3);
-	posicion = findEmployeeById(list, len, idIn);
+	posicion = BuscarPorId(list, len, idIn);
 	if (posicion == -1) {
 		printf("Error el id no existe\n");
 	} else {
@@ -317,8 +315,8 @@ int modificarUI(Ghost *list, int len) {
 		printf("%d -- %s -- %s -- %f -- %d \n", list[posicion].id,
 				list[posicion].nombre, list[posicion].direccion,
 				list[posicion].precio, list[posicion].tipo);
-		if (listForModify(bList) == 0) {
-			if (modifyEmployeeforId(list, len, bList) == 0) {
+		if (listaDeModificacion(bList) == 0) {
+			if (ModificarPorId(list, len, bList) == 0) {
 				printf("Modificacion exitosa\n");
 				retorno = 0;
 			}
@@ -401,7 +399,7 @@ int EliminarUI(Ghost *list, int len) {
 	char conf;
 	printf("Baja\n");
 	getInt(&idIn, "Ingrese el id para dar de baja\n", "Error\n", 1, 100000, 30);
-	posicion = findEmployeeById(list, len, idIn);
+	posicion = BuscarPorId(list, len, idIn);
 	if (posicion == -1) {
 		printf("Error el id no existe\n");
 	} else {
@@ -411,7 +409,7 @@ int EliminarUI(Ghost *list, int len) {
 		getChar(&conf, "Ingrese s para confirmar la baja\n", "Error\n", 'a',
 				'z', 2);
 		if (conf == 's' || conf == 'S') {
-			if (removeEmployee(list, len, idIn) == 0) {
+			if (BajaPorId(list, len, idIn) == 0) {
 				printf("Baja exitosa\n");
 				retorno = 0;
 			}
