@@ -445,9 +445,26 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
-if(this!=NULL && from < to  && from>=0 &&  to  < this->size && from<this->size ){
+    int tamThis = ll_len(this);
+    void* pElement = NULL;
 
-}
+    if(this != NULL && tamThis > -1 && (from >= 0 && from < tamThis) && (to > from  && to <= tamThis) )
+    {
+        cloneArray = ll_newLinkedList();
+
+        if(cloneArray != NULL)
+        {
+            for(int i=from; i<to; i++)
+            {
+                pElement = ll_get(this, i);
+                if(pElement != NULL)
+                {
+                    ll_add(cloneArray, pElement);
+                }
+            }
+        }
+    }
+
     return cloneArray;
 }
 
@@ -463,9 +480,13 @@ LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
 
+    if(this != NULL)
+    {
+        cloneArray = ll_subList(this, 0, ll_len(this));
+    }
+
     return cloneArray;
 }
-
 
 /** \brief Ordena los elementos de la lista utilizando la funcion criterio recibida como parametro
  * \param pList LinkedList* Puntero a la lista
@@ -477,8 +498,86 @@ LinkedList* ll_clone(LinkedList* this)
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
 {
     int returnAux =-1;
+	int i;
+	int j;
+	int flagOrdeno;
+	void* swap;
+	void* swapAnterior;
+	int len =ll_len(this);
+if (this!=NULL && pFunc !=NULL && (order==1 || order==0) ){
+	for(i=1; i<len; i++){
+		j=i;
+		flagOrdeno = 1;
+		while(flagOrdeno != 0 && j!=0){
+			flagOrdeno = 0;
+
+			if(pFunc(ll_get(this,j),ll_get(this,j-1))>0 && order==0 ){
+				swapAnterior = ll_get(this,j-1);
+				swap=ll_get(this,j);
+				ll_set(this,j-1,swap);
+				//array[j-1] = array[j];
+				ll_set(this,j,swapAnterior);
+				//array[j] = swap;
+				flagOrdeno = 1;
+			}
+			if(pFunc(ll_get(this,j),ll_get(this,j-1))<0 && order!=0 ){
+							swapAnterior = ll_get(this,j-1);
+							swap=ll_get(this,j);
+							ll_set(this,j-1,swap);
+							//array[j-1] = array[j];
+							ll_set(this,j,swapAnterior);
+							//array[j] = swap;
+							flagOrdeno = 1;
+						}
+			j--;
+		}
+		returnAux=0;
+	}
+}
 
     return returnAux;
 
 }
 
+int ll_map(LinkedList* this, int (*pFunc)(void*)){
+	int retorno =-1;
+	int i=0;
+	int len=0;
+	if(this!=NULL && pFunc!=NULL){
+		len=ll_len(this);
+		for(i=0;i<len;i++){
+
+			pFunc(ll_get(this,i));
+
+		}
+	}
+	return retorno;
+}
+
+LinkedList* filter (LinkedList* this,int(* pFunc)(void*))
+{
+    LinkedList* cloneArray = NULL;
+    void* pElement = NULL;
+    int len =0;
+    int i=0;
+    if(this != NULL && pFunc !=NULL )
+    {
+        cloneArray = ll_newLinkedList();
+        len=ll_len(this);
+        if(cloneArray != NULL)
+        {
+            for(i=0; i<len; i++)
+            {
+            	pElement=ll_get(this,i);
+                if(pFunc(pElement)==1)
+                {
+                    ll_add(cloneArray, pElement);
+
+                }
+
+            }
+        }
+    }
+
+    return cloneArray;
+}
